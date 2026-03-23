@@ -6,37 +6,25 @@
 </head>
 <body>
 
-  <div class="navbar">
-    <div class="logo">
-      <img src="../assets/logo.png" alt="MediMind Logo">
-    </div>
-
-    <div class="nav-links">
-      <a href="#">ABOUT US</a>
-      <a href="#">LIBRARY</a>
-      <a href="#">INSIGHTS</a>
-      <a href="#">PROFILE</a>
-    </div>
-
-    <a href="search.html">
-      <button class="cta-btn">CHECK SYMPTOMS</button>
-    </a>
-  </div>
-
   <div class="container">
-    <div class="hero">
-      <img src="../assets/logo.png" alt="MediMind Logo">
-      <h1>MEDIMIND</h1>
+    <img src="../assets/logo.png" class="logo" alt="MediMind Logo">
 
-      <p>
-        LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. SED NON RISUS. 
-        SUSPENDISSE LECTUS TORTOR, DIGNISSIM SIT AMET, ADIPISCING NEC, ULTRICIES SED, DOLOR. 
-        CRAS ELEMENTUM ULTRICES DIAM. MAECENAS LIGULA MASSA, VARIUS A, SEMPER CONGUE, 
-        EUISMOD NON, MI. PORTTITOR, ORCI NEC NONUMMY MOLESTIE, ENIM EST ELEIFEND MI, 
-        NON FERMENTUM DIAM NISL SIT AMET ERAT. DUIS SEMPER.
-      </p>
-    </div>
+    <h1>MEDIMIND</h1>
+
+    <p>
+      LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. SED NON RISUS.
+      SUSPENDISSE LECTUS TORTOR, DIGNISSIM SIT AMET, ADIPISCING NEC, ULTRICIES
+      SED, DOLOR. CRAS ELEMENTUM ULTRICES DIAM. MAECENAS LIGULA MASSA.
+    </p>
+
+    <button onclick="startApp()">CHECK SYMPTOMS</button>
   </div>
+
+  <script>
+    function startApp() {
+      window.location.href = "search.html";
+    }
+  </script>
 
 </body>
 </html>
