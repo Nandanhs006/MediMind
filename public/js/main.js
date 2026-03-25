@@ -1,7 +1,23 @@
 let selectedSymptoms = [];
 let currentIndex = -1;
 let currentSuggestions = [];
-const API_BASE_URL = "/api";
+
+// Detect base path for GitHub Pages compatibility
+const BASE_PATH = window.location.pathname.includes('/MediMind') 
+  ? '/MediMind--------Symptom-based-disease-matching-webapp'
+  : '';
+
+// Detect deployment environment
+const IS_GITHUB_PAGES = window.location.hostname === 'nandanhs006.github.io' || 
+                         window.location.hostname.includes('github.io');
+
+// For Render: use relative paths, for GitHub Pages: use null
+const API_BASE_URL = IS_GITHUB_PAGES ? null : "/api";
+
+// Utility function to get full path for assets
+function getPath(path) {
+  return BASE_PATH + path;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById('toggleBtn');
@@ -57,6 +73,11 @@ async function handleInput() {
 
   if (!query) {
     closeSuggestions();
+    return;
+  }
+
+  if (IS_GITHUB_PAGES) {
+    console.warn("API not available on GitHub Pages. Please deploy to a server with a backend.");
     return;
   }
 
@@ -169,6 +190,11 @@ async function loadResults() {
 
   if (!symptoms.length) {
     resultsEl.innerHTML = "<li>No symptoms selected. Please go back and try again.</li>";
+    return;
+  }
+
+  if (IS_GITHUB_PAGES) {
+    resultsEl.innerHTML = "<li style='color: red;'><strong>⚠️ Demo Mode:</strong> Backend API not available on GitHub Pages. Please deploy this project to a server with a Node.js backend to get real results.</li>";
     return;
   }
 
