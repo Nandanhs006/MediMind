@@ -5,7 +5,7 @@ const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
-  password: process.env.DB_PASS,
+  password: process.env.DB_PASSWORD,
   port: parseInt(process.env.DB_PORT, 10),
 });
 
@@ -15,7 +15,7 @@ pool.on('connect', () => {
 
 pool.on('error', (err) => {
   console.error('Unexpected PostgreSQL error:', err);
-  process.exit(1);
+  // Don't exit - allow app to continue for GitHub Pages frontend
 });
 
 const testConnection = async () => {
@@ -23,8 +23,8 @@ const testConnection = async () => {
     await pool.query('SELECT 1');
     console.log('Database connection test successful');
   } catch (err) {
-    console.error('Database connection failed:', err);
-    process.exit(1);
+    console.error('Database connection warning:', err.message);
+    // Don't exit - allow app to continue without database
   }
 };
 
