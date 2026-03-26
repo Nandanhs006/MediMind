@@ -1,4 +1,25 @@
 {
+  "name": "medimind-symptom-disease-matcher",
+  "version": "1.0.0",
+  "description": "A web application that helps users explore potential health conditions based on symptoms",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test-server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "health",
+    "symptoms",
+    "disease",
+    "matching",
+    "medical"
+  ],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1",

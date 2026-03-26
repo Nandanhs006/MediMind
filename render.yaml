@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: medimind-webapp
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_USER
+        scope: run
+      - key: DB_HOST
+        scope: run
+      - key: DB_NAME
+        scope: run
+      - key: DB_PASSWORD
+        scope: run
+      - key: DB_PORT
+        scope: run
