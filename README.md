@@ -46,7 +46,7 @@ A web application that helps users explore potential health conditions based on 
 - PostgreSQL (running)
 - npm or yarn
 
-### Steps
+### Local Development
 
 1. **Clone the repository**
    ```bash
@@ -60,7 +60,14 @@ A web application that helps users explore potential health conditions based on 
    ```
 
 3. **Set up environment variables**
-   Create a `.env` file in the root directory:
+   - Copy `.env.example` to `.env`
+   - Update the values with your database credentials:
+   ```env
+   DB_USER=postgres
+   DB_HOST=localhost
+   DB_NAME=disease_db1
+   DB_PASSWORD=your_password
+   DB_PORT=5432
    ```
 
 4. **Initialize the database**
@@ -70,13 +77,50 @@ A web application that helps users explore potential health conditions based on 
 
 5. **Start the server**
    ```bash
-   node server.js
+   npm start
+   # Or for development with auto-reload
+   npm run dev
    ```
 
 6. **Open in browser**
    ```
    http://localhost:5000
    ```
+
+## Deployment to Render
+
+### Quick Deploy to Render (Recommended)
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Prepare for Render deployment"
+   git push origin main
+   ```
+
+2. **Set up PostgreSQL on Neon**
+   - Create account at https://neon.tech
+   - Create a new project (free tier available)
+   - Get connection string details
+
+3. **Deploy to Render**
+   - Go to https://render.com
+   - Click "New Web Service"
+   - Connect GitHub repository
+   - Set environment variables from Neon database
+   - Deploy!
+
+For detailed deployment instructions, see [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md)
+
+### Required Environment Variables for Render
+```
+DB_USER          # PostgreSQL username
+DB_HOST          # Database host (e.g., neon.tech)
+DB_NAME          # Database name
+DB_PASSWORD      # Database password
+DB_PORT          # Database port (usually 5432)
+NODE_ENV         # production
+```
 
 ## API Endpoints
 
