@@ -18,3 +18,7 @@ services:
         scope: run
       - key: DB_PORT
         scope: run
+      - key: DB_SSL
+        value: require
+      - key: DB_CHANNEL_BINDING
+        value: require

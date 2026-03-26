@@ -11,6 +11,8 @@ const predictDisease = async (req, res) => {
   }
 
   try {
+    console.log(`[PREDICT] Querying diseases for symptoms: ${symptoms.join(', ')}`);
+    
     const query = `
       SELECT 
         d.id,
@@ -25,6 +27,7 @@ const predictDisease = async (req, res) => {
     `;
 
     const result = await pool.query(query, [symptoms]);
+    console.log(`[PREDICT] Query returned ${result.rows.length} diseases`);
 
     // Filter + clean response
     const filtered = result.rows
@@ -44,7 +47,8 @@ const predictDisease = async (req, res) => {
     res.json(filtered);
 
   } catch (err) {
-    console.error('Prediction error:', err);
+    console.error('[PREDICT] Error:', err.message);
+    console.error('[PREDICT] Stack:', err.stack);
     res.status(500).json({
       error: 'Internal server error',
     });

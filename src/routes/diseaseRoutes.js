@@ -17,6 +17,8 @@ router.get('/symptoms', async (req, res) => {
   }
 
   try {
+    console.log(`[SYMPTOMS] Searching for: ${q}`);
+    
     const result = await pool.query(
       `SELECT name 
        FROM symptoms 
@@ -26,9 +28,11 @@ router.get('/symptoms', async (req, res) => {
       [`%${q}%`]
     );
 
+    console.log(`[SYMPTOMS] Found ${result.rows.length} matches`);
     res.json(result.rows.map(r => r.name));
   } catch (err) {
-    console.error('Symptoms fetch error:', err);
+    console.error('[SYMPTOMS] Error:', err.message);
+    console.error('[SYMPTOMS] Stack:', err.stack);
     res.status(500).json({
       error: 'Internal server error',
     });

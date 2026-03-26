@@ -3,6 +3,11 @@ require('dotenv').config({
   path: process.env.NODE_ENV === 'production' ? '.env' : '.env.development'
 });
 
+// Log configuration status for debugging
+console.log(`[CONFIG] NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`[CONFIG] DB_HOST: ${process.env.DB_HOST ? 'SET' : 'MISSING'}`);
+console.log(`[CONFIG] DB_USER: ${process.env.DB_USER ? 'SET' : 'MISSING'}`);
+
 // Configure connection
 const poolConfig = {
   user: process.env.DB_USER,
