@@ -1,10 +1,4 @@
-.env.local
+.env
 .env.*.local
 .vercel
-.env
-.env.example
-DEPLOYMENT_REPORT.md
-PRE_DEPLOYMENT_CHECKLIST.md
-*.md
-README.md
-README.md
+node_modules/
