@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Disease Library</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <img src="../assets/logo.png" class="sidebar-logo">
+    <div class="sidebar-links">
+      <a href="/">Home</a>
+      <a href="workInfo.html">How it Works</a>
+      <a href="library.html" class="active">Library</a>
+      <a href="search.html">Check</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+
+  <div class="toggle-btn" id="toggleBtn">&lt;</div>
+
+  <div class="container">
+    <img src="../assets/logo.png" class="logo1" alt="MediMind Logo">
+
+    <h1 style="text-align: center; margin: 20px 0;">Disease Library</h1>
+    <p style="text-align: center; margin-bottom: 20px;">
+      Browse comprehensive information about diseases including descriptions, symptoms, and treatment options.
+    </p>
+
+    <div class="library-container">
+      <div class="library-search">
+        <input 
+          type="text" 
+          id="disease-search" 
+          placeholder="Search diseases..." 
+          oninput="filterDiseases()"
+        >
+        <ul id="disease-list"></ul>
+      </div>
+
+      <div class="disease-details" id="disease-details">
+        <div class="no-disease-selected">
+          <p>Enter or Select a disease to view its details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/diseases-data.js"></script>
+  <script src="../js/library.js"></script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

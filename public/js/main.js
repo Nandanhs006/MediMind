@@ -189,16 +189,16 @@ async function loadResults() {
     .filter(Boolean);
 
   if (!symptoms.length) {
-    resultsEl.innerHTML = "<li>No symptoms selected. Please go back and try again.</li>";
+    resultsEl.innerHTML = "<div style='text-align: center; color: #999; padding: 40px;'>No symptoms selected. Please go back and try again.</div>";
     return;
   }
 
   if (IS_GITHUB_PAGES) {
-    resultsEl.innerHTML = "<li style='color: red;'><strong>⚠️ Demo Mode:</strong> Backend API not available on GitHub Pages. Please deploy this project to a server with a Node.js backend to get real results.</li>";
+    resultsEl.innerHTML = "<div style='text-align: center; color: red; padding: 40px;'><strong>⚠️ Demo Mode:</strong> Backend API not available on GitHub Pages. Please deploy this project to a server with a Node.js backend to get real results.</div>";
     return;
   }
 
-  resultsEl.innerHTML = "<li>Loading results...</li>";
+  resultsEl.innerHTML = "<div style='text-align: center; color: #999; padding: 40px;'>Loading results...</div>";
 
   try {
     const res = await fetch(`${API_BASE_URL}/predict`, {
@@ -213,20 +213,32 @@ async function loadResults() {
 
     if (!res.ok) {
       const message = data.error || data.message || "Failed to fetch prediction results";
-      resultsEl.innerHTML = `<li>${message}</li>`;
+      resultsEl.innerHTML = `<div style='text-align: center; color: red; padding: 40px;'>${message}</div>`;
       return;
     }
 
     if (!Array.isArray(data) || data.length === 0) {
-      resultsEl.innerHTML = "<li>No matching diseases found.</li>";
+      resultsEl.innerHTML = "<div style='text-align: center; color: #999; padding: 40px;'>No matching diseases found.</div>";
       return;
     }
 
+    // Render results with disease details from library
     resultsEl.innerHTML = data
-      .map((item) => `<li><strong>${item.name}</strong> - Match: ${item.match}%</li>`)
+      .map((item) => {
+        const diseaseDetails = getDiseaseData(item.name);
+        return `
+          <div class="card">
+            <h3 style="color: #FFFFFF; margin-bottom: 8px;">${item.name}</h3>
+            <p style="color: #FFFFFF; font-size: 12px; margin-bottom: 12px;">Match Confidence: <strong>${item.match}%</strong></p>
+            <p style="color: #FFFFFF; font-size: 13px; line-height: 1.5; margin-bottom: 10px;">${diseaseDetails.description || 'N/A'}</p>
+            <p style="color: #FFFFFF; font-size: 12px; margin-bottom: 10px;"><strong>Key Symptoms:</strong> ${diseaseDetails.symptoms ? diseaseDetails.symptoms.slice(0, 3).join(', ') : 'N/A'}</p>
+            <a href="../pages/library.html?disease=${encodeURIComponent(item.name)}" style="color: #FFFFFF; text-decoration: underline; font-weight: 600; font-size: 12px;">View details →</a>
+          </div>
+        `;
+      })
       .join("");
   } catch (err) {
     console.error(err);
-    resultsEl.innerHTML = "<li>Unable to reach server. Please try again.</li>";
+    resultsEl.innerHTML = "<div style='text-align: center; color: red; padding: 40px;'>Unable to reach server. Please try again.</div>";
   }
 }

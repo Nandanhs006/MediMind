@@ -10,10 +10,11 @@
   <img src="../assets/logo.png" class="sidebar-logo">
 
   <div class="sidebar-links">
-    <a href=\"/\">Home</a>
-    <a href=\"workInfo.html\">How it Works</a>
-    <a href=\"search.html\">Check</a>
-    <a href=\"about.html\">About</a>
+    <a href="/">Home</a>
+    <a href="workInfo.html">How it Works</a>
+    <a href="library.html">Library</a>
+    <a href="search.html">Check</a>
+    <a href="about.html">About</a>
   </div>
 </div>
 <div class="toggle-btn" id="toggleBtn">&lt;</div>
@@ -21,7 +22,7 @@
   <div class="container">
     <h1>Prediction Results</h1>
 
-    <ul id="results"></ul>
+    <div class="cards" id="results"></div>
 
     <br>
     <button onclick="startApp()">🔄 Try Again</button>
@@ -29,8 +30,9 @@
     <!-- <a href="/">⬅ Home</a> -->
   </div>
 
+  <script src="../js/diseases-data.js"></script>
   <script src="../js/main.js"></script>
-    <script>
+  <script>
     function startApp() {
       window.location.href = "search.html";
     }
